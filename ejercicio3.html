@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <title>Formulario y Ejercicio</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #e8f5e9; /* Verde claro suave */
+  color: #2e4a2c; /* Marrón suave */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.container {
+  width: 95%; /* Tamaño adaptable */
+  max-width: 600px; /* Tamaño máximo */
+  margin: 0 auto; /* Centrar horizontalmente */
+  padding: 20px; /* Espaciado interno */
+  background-color: #f9f9f9; /* Fondo claro */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  border-radius: 8px; /* Bordes redondeados */
+  border: none; /* Eliminar cualquier borde blanco */
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #1a3d32; /* Verde oscuro */
+}
+
+p {
+  margin-bottom: 20px;
+  font-size: 1rem;
+  color: #2e4a2c; /* Marrón suave */
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 1rem;
+  color: #3e5c3b; /* Verde suave */
+}
+
+input, select {
+  width: 100%;
+  max-width: 600px; /* Limitar el ancho */
+  padding: 10px;
+  margin: 0 auto 15px; /* Centrado automático */
+  border: 1px solid #b5c9b8; /* Verde claro */
+  border-radius: 8px;
+  background-color: #f9f9f9; /* Fondo claro */
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+button {
+  display: inline-block;
+  margin: 15px auto;
+  padding: 12px 24px;
+  background-color: #4caf50; /* Verde brillante */
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #388e3c; /* Verde más oscuro */
+}
+
+iframe, img {
+  max-width: 100%; /* No más ancho que su contenedor */
+  height: auto; /* Mantener proporciones */
+  border-radius: 8px;
+  margin: 20px 0; /* Separación con otros elementos */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombras para estética */
+}
+
+audio {
+  margin: 20px auto;
+  width: 100%;
+  max-width: 600px; /* Tamaño controlado */
+}
+
+.hidden {
+  display: none;
+}
+
+#imageDescriptionExercise img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #b5c9b8;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: block;
+}
+
+#imageDescriptionExercise {
+  background-color: transparent; /* Evita rectángulos blancos */
+  padding: 0; /* Evita relleno adicional */
+  margin: 0 auto; /* Centra el contenido */
+  text-align: center; /* Centra el texto e imagen */
+}
+
+iframe {
+  display: block;
+  margin: 0 auto;
+}
+
+#youtubeContainer {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+  height: 0;
+  overflow: hidden; /* Evita que el contenido desborde */
+  margin-bottom: 20px;
+}
+
+#youtubeContainer iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none; /* Elimina bordes no deseados */
+  display: block;
+}
+
+#waitMessage {
+  font-size: 0.9rem;
+  color: #3e5c3b; /* Verde suave */
+  margin-bottom: 10px;
+}
+
+/* Estilo para el contenedor final */
+#downloadResults {
+  text-align: center; /* Centrar el contenido */
+  margin-top: 20px; /* Espaciado superior */
+}
+
+/* Botón específico de descarga */
+.download-button {
+  margin: 20px auto;
+  padding: 12px 24px;
+  background-color: #4caf50; /* Verde brillante */
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+  background-color: #388e3c; /* Verde más oscuro */
+}
+
+  </style>
+</head>
+<body>
+    <div class="container">
+      <!-- Registro de Usuario -->
+      <div id="registration">
+        <h1>Registro de Usuario</h1>
+        <form id="registrationForm">
+          <label for="name">Nombre:</label>
+          <input type="text" id="name" name="name" required>
+          
+          <label for="age">Edad:</label>
+          <input type="number" id="age" name="age" min="1" required>
+          
+          <label for="birthdate">Fecha de Nacimiento:</label>
+          <input type="date" id="birthdate" name="birthdate" required>
+          
+          <label for="contact">Número de Contacto:</label>
+          <input type="tel" id="contact" name="contact" required>
+          
+          <label for="country">País:</label>
+          <input type="text" id="country" name="country" required>
+          
+          <label for="city">Ciudad:</label>
+          <input type="text" id="city" name="city" required>
+          
+          <label for="education">Nivel de Estudios:</label>
+          <select id="education" name="education" required>
+            <option value="" disabled selected>Seleccione su nivel de estudios</option>
+            <option value="Primaria">Primaria</option>
+            <option value="Secundaria">Secundaria</option>
+            <option value="Preparatoria">Formación Profesional</option>
+            <option value="Universidad">Universidad</option>
+            <option value="Postgrado">Postgrado</option>
+          </select>
+          
+          <button type="button" onclick="submitRegistration()">Continuar</button>
+        </form>
+      </div>
+  
+      <!-- Ejercicio de Selección -->
+      <div id="exercise" class="hidden container">
+        <h1>Ejercicio de Selección</h1>
+        <p>Lee la frase y selecciona la opción correcta:</p>
+        <p><strong>Pregunta:</strong> ¿Cuál es la capital de Francia?</p>
+        <form id="quizForm">
+          <div class="option">
+            <input type="radio" id="option1" name="answer" value="Madrid">
+            <label for="option1">Madrid</label>
+          </div>
+          <div class="option">
+            <input type="radio" id="option2" name="answer" value="Berlín">
+            <label for="option2">Berlín</label>
+          </div>
+          <div class="option">
+            <input type="radio" id="option3" name="answer" value="París">
+            <label for="option3">París</label>
+          </div>
+          <div class="option">
+            <input type="radio" id="option4" name="answer" value="Roma">
+            <label for="option4">Roma</label>
+          </div>
+          <button type="button" onclick="submitAnswer()">Guardar Datos</button>
+        </form>
+      </div>
+  
+      <!-- Ejercicio de Grabación -->
+      <div id="audioExercise" class="hidden container">
+        <h1>Ejercicio de Grabación</h1>
+        <p>Presiona el botón para grabar un audio con tu respuesta:</p>
+        <div id="youtubeContainer">
+          <iframe
+            id="instructionalVideo"
+            src="https://drive.google.com/file/d/1FCj_uOEjMK-r85DNBI0NDciIRIOIiyb1/preview"
+            frameborder="0"
+            allow="autoplay"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <p id="waitMessage" class="hidden">El botón estará disponible en 20 minutos.</p>
+        <button id="startRecording" class="hidden">Comenzar Grabación</button>
+        <button id="stopRecording" class="hidden">Detener Grabación</button>
+        <audio id="audioPlayback" controls class="hidden"></audio>
+        <button id="saveAudio" class="hidden">Guardar Audio</button>
+        <button id="nextToDescription" class="hidden">Continuar</button>
+      </div>
+      
+    <div id="imageDescriptionExercise" class="hidden container">
+      <h1>Ejercicio: Descripción de la Imagen</h1>
+      <p>Observa la siguiente imagen y graba un audio describiendo lo que ves.</p>
+        <img 
+          src="https://i.imgur.com/lfdQhdI.png" 
+          alt="Imagen del ejercicio"
+        />
+      <p><strong>Pregunta:</strong> ¿Qué observas en esta imagen?</p>
+      <button id="startImageDescriptionRecording">Comenzar Grabación</button>
+      <button id="stopImageDescriptionRecording" class="hidden">Detener Grabación</button>
+      <audio id="imageDescriptionPlayback" controls class="hidden"></audio>
+      <button id="saveImageDescriptionAudio" class="hidden">Guardar Audio</button>
+    </div>
+
+    <div id="repeatExercise" class="hidden container">
+      <h1>Ejercicio: Repetición de Oraciones</h1>
+      <p id="repeatStatus" style="font-size: 1.2rem; font-weight: bold; color: #4caf50;">Inicia el ejercicio para empezar.</p>
+      <button id="startRepeatExercise">Iniciar Ejercicio</button>
+      <button id="saveRepeatExercise" class="hidden">Guardar Todos los Audios</button>
+    </div>    
+
+    <div id="wordRepeatExercise" class="hidden container">
+      <h1>Ejercicio de Repetición de Palabras</h1>
+      <p id="wordRepeatStatus">Presiona el botón para comenzar.</p>
+      <button id="startWordRepeatExercise">Comenzar Ejercicio</button>
+      <button id="saveWordRepeatExercise" class="hidden">Finalizar y Guardar Resultados</button>
+    </div>
+    
+    <div id="downloadResults" class="hidden container">
+      <h1>Finalizar y Descargar Resultados</h1>
+      <button class="download-button" onclick="saveFinalResults()">Descargar ZIP</button>
+    </div>
+    
+  <script>
+    let userData = {}; // Almacena los datos del usuario
+    let mediaRecorder, descriptionMediaRecorder, repeatMediaRecorder;
+let audioChunks = [], descriptionAudioChunks = [], repeatAudioChunks = [];
+let currentSentenceIndex = 0;
+const sentences = [
+  "El cielo es azul como el mar  piiii",
+  "Mi mama es muy buena piiii",
+  "El gato persigue al raton  piiii",
+  "El aprendizaje nunca se detiene siempre continua. piiii",
+  "La tecnología nos conecta a todas las personas. piiii"
+  ]
+
+// Inicializar al cargar el DOM
+document.addEventListener("DOMContentLoaded", () => {
+  const delayToEnableButton = 30; // Tiempo de espera para habilitar la grabación
+  const startRecordingButton = document.getElementById("startRecording");
+  const waitMessage = document.getElementById("waitMessage");
+  
+
+  startRecordingButton.style.display = "block";
+  startRecordingButton.disabled = true;
+  waitMessage.classList.remove("hidden");
+
+  setTimeout(() => {
+    startRecordingButton.disabled = false;
+    waitMessage.textContent = "El botón está ahora disponible.";
+  }, delayToEnableButton * 1000);
+});
+
+// Registro de usuario
+function submitRegistration() {
+  const name = document.getElementById("name").value;
+  const age = document.getElementById("age").value;
+  const birthdate = document.getElementById("birthdate").value;
+  const contact = document.getElementById("contact").value;
+  const country = document.getElementById("country").value;
+  const city = document.getElementById("city").value;
+  const education = document.getElementById("education").value;
+
+  if (!name || !age || !birthdate || !contact || !country || !city || !education) {
+    alert("Por favor, completa todos los campos antes de continuar.");
+    return;
+  }
+
+  // Guardar datos en userData
+  Object.assign(userData, { name, age, birthdate, contact, country, city, education });
+
+  // Cambiar a la siguiente sección
+  document.getElementById("registration").classList.add("hidden");
+  document.getElementById("exercise").classList.remove("hidden");
+}
+
+
+// Ejercicio de selección
+function submitAnswer() {
+  const selectedOption = document.querySelector('input[name="answer"]:checked');
+  if (!selectedOption) {
+    alert("Por favor, selecciona una respuesta antes de continuar.");
+    return;
+  }
+
+  userData.exerciseAnswer = selectedOption.value;
+  document.getElementById("exercise").classList.add("hidden");
+  document.getElementById("audioExercise").classList.remove("hidden");
+}
+
+// Grabación de audio del video
+document.getElementById("startRecording").addEventListener("click", async () => {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    mediaRecorder = new MediaRecorder(stream);
+
+    mediaRecorder.start();
+    audioChunks = [];
+
+    mediaRecorder.addEventListener("dataavailable", event => {
+      audioChunks.push(event.data);
+    });
+
+    mediaRecorder.addEventListener("stop", () => {
+      const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+      userData.audioData = audioBlob;
+
+      document.getElementById("saveAudio").classList.remove("hidden");
+    });
+
+    document.getElementById("startRecording").classList.add("hidden");
+    document.getElementById("stopRecording").classList.remove("hidden");
+  } catch (error) {
+    alert("No se puede acceder al micrófono. Verifica los permisos.");
+  }
+});
+
+document.getElementById("stopRecording").addEventListener("click", () => {
+  mediaRecorder.stop();
+  document.getElementById("stopRecording").classList.add("hidden");
+});
+
+document.getElementById("saveAudio").addEventListener("click", () => {
+  if (!userData.audioData) {
+    alert("No se ha grabado el audio de la narración del video.");
+    return;
+  }
+  console.log("Audio de narración guardado correctamente.");
+  document.getElementById("audioExercise").classList.add("hidden");
+  document.getElementById("imageDescriptionExercise").classList.remove("hidden");
+});
+
+// Ejercicio de descripción de imagen
+document.getElementById("startImageDescriptionRecording").addEventListener("click", async () => {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    descriptionMediaRecorder = new MediaRecorder(stream);
+
+    descriptionMediaRecorder.start();
+    descriptionAudioChunks = [];
+
+    descriptionMediaRecorder.addEventListener("dataavailable", event => {
+      descriptionAudioChunks.push(event.data);
+    });
+
+    descriptionMediaRecorder.addEventListener("stop", () => {
+      const descriptionAudioBlob = new Blob(descriptionAudioChunks, { type: "audio/wav" });
+      userData.imageDescriptionAudioData = descriptionAudioBlob;
+
+      document.getElementById("saveImageDescriptionAudio").classList.remove("hidden");
+    });
+
+    document.getElementById("startImageDescriptionRecording").classList.add("hidden");
+    document.getElementById("stopImageDescriptionRecording").classList.remove("hidden");
+  } catch (error) {
+    alert("No se puede acceder al micrófono. Verifica los permisos.");
+  }
+});
+
+document.getElementById("stopImageDescriptionRecording").addEventListener("click", () => {
+  descriptionMediaRecorder.stop();
+  document.getElementById("stopImageDescriptionRecording").classList.add("hidden");
+});
+document.getElementById("saveImageDescriptionAudio").addEventListener("click", () => {
+  if (!userData.imageDescriptionAudioData) {
+    alert("No se ha grabado el audio de la descripción de la lámina.");
+    return;
+  }
+  console.log("Audio de descripción de la lámina guardado correctamente.");
+  document.getElementById("imageDescriptionExercise").classList.add("hidden");
+  document.getElementById("repeatExercise").classList.remove("hidden");
+});
+
+// Ejercicio de repetición de oraciones
+document.getElementById("startRepeatExercise").addEventListener("click", () => {
+  document.getElementById("startRepeatExercise").classList.add("hidden");
+  document.getElementById("repeatStatus").textContent = "Escucha...";
+  playAndRecordNextSentence();
+});
+
+async function playAndRecordNextSentence() {
+  if (currentSentenceIndex >= sentences.length) {
+    // Cambia el estado al finalizar todas las frases y pasa al ejercicio de palabras
+    document.getElementById("repeatExercise").classList.add("hidden");
+    document.getElementById("wordRepeatExercise").classList.remove("hidden");
+    startWordRepeatExercise();
+    return;
+  }
+
+  const sentence = sentences[currentSentenceIndex];
+  const utterance = new SpeechSynthesisUtterance(sentence);
+  utterance.lang = "es-ES";
+
+  // Cambiar el estado a "Escucha" mientras se reproduce la frase
+  document.getElementById("repeatStatus").textContent = "Escucha...";
+
+  utterance.onend = () => {
+    // Cambiar el estado a "Habla" cuando termine la frase
+    document.getElementById("repeatStatus").textContent = "Habla...";
+    startRecordingForRepetition();
+  };
+
+  window.speechSynthesis.speak(utterance);
+}
+
+async function startRecordingForRepetition() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    repeatMediaRecorder = new MediaRecorder(stream);
+
+    repeatMediaRecorder.start();
+    repeatAudioChunks = [];
+
+    repeatMediaRecorder.addEventListener("dataavailable", event => {
+      repeatAudioChunks.push(event.data);
+    });
+
+    repeatMediaRecorder.addEventListener("stop", () => {
+      const repeatAudioBlob = new Blob(repeatAudioChunks, { type: "audio/wav" });
+      userData[`repeatAudio_${currentSentenceIndex + 1}`] = repeatAudioBlob;
+
+      currentSentenceIndex++;
+      playAndRecordNextSentence();
+    });
+
+    // Detener la grabación después de 5 segundos
+    setTimeout(() => {
+      repeatMediaRecorder.stop();
+    }, 5000);
+  } catch (error) {
+    alert("No se puede acceder al micrófono. Verifica los permisos.");
+  }
+}
+
+// Variables globales para el ejercicio de palabras
+let currentWordIndex = 0;
+let wordMediaRecorder;
+let wordAudioChunks = [];
+const words = ["peco", "talar", "chipiciri", "árbol", "río"]; // Lista de palabras a repetir
+
+// Iniciar el ejercicio de repetición de palabras
+document.getElementById("startWordRepeatExercise").addEventListener("click", () => {
+  document.getElementById("startWordRepeatExercise").classList.add("hidden");
+  document.getElementById("wordRepeatStatus").textContent = "Escucha...";
+  playAndRecordNextWord();
+});
+
+// Función para reproducir la palabra actual y manejar la grabación
+async function playAndRecordNextWord() {
+  // Verificar si hemos terminado todas las palabras
+  if (currentWordIndex >= words.length) {
+    // Mostrar el botón para finalizar el ejercicio
+    document.getElementById("wordRepeatStatus").textContent = "Ejercicio completado.";
+    document.getElementById("saveWordRepeatExercise").classList.remove("hidden");
+    return;
+  }
+
+  // Obtener la palabra actual
+  const word = words[currentWordIndex];
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = "es-ES"; // Idioma español
+
+  // Mostrar estado visual de "Escucha"
+  document.getElementById("wordRepeatStatus").textContent = `Escucha... Palabra ${currentWordIndex + 1} de ${words.length}`;
+
+  // Reproducir la palabra
+  utterance.onend = () => {
+    // Cambiar el estado visual a "Habla" cuando termine de reproducir la palabra
+    document.getElementById("wordRepeatStatus").textContent = "Habla...";
+    startRecordingForWord();
+  };
+
+  window.speechSynthesis.speak(utterance);
+}
+
+// Función para iniciar la grabación de audio para la palabra actual
+async function startRecordingForWord() {
+  try {
+    // Solicitar acceso al micrófono
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    wordMediaRecorder = new MediaRecorder(stream);
+
+    // Iniciar grabación
+    wordMediaRecorder.start();
+    wordAudioChunks = [];
+
+    wordMediaRecorder.addEventListener("dataavailable", event => {
+      wordAudioChunks.push(event.data);
+    });
+
+    wordMediaRecorder.addEventListener("stop", () => {
+      // Crear un blob del audio grabado
+      const wordAudioBlob = new Blob(wordAudioChunks, { type: "audio/wav" });
+
+      // Guardar el audio en los datos del usuario
+      userData[`wordAudio_${currentWordIndex + 1}`] = wordAudioBlob;
+
+      // Avanzar al siguiente índice
+      currentWordIndex++;
+
+      // Continuar con la siguiente palabra
+      playAndRecordNextWord();
+    });
+
+    // Detener la grabación automáticamente después de 5 segundos
+    setTimeout(() => {
+      wordMediaRecorder.stop();
+    }, 5000);
+  } catch (error) {
+    alert("No se puede acceder al micrófono. Verifica los permisos.");
+  }
+}
+
+// Finalizar el ejercicio de palabras y mostrar la descarga de resultados
+document.getElementById("saveWordRepeatExercise").addEventListener("click", () => {
+  document.getElementById("wordRepeatExercise").classList.add("hidden");
+  document.getElementById("downloadResults").classList.remove("hidden");
+});
+// Función de descarga final
+async function saveFinalResults() {
+  const zip = new JSZip();
+
+  const finalData = {
+    name: userData.name,
+    age: userData.age,
+    birthdate: userData.birthdate,
+    contact: userData.contact,
+    country: userData.country,
+    city: userData.city,
+    education: userData.education,
+    exerciseAnswer: userData.exerciseAnswer,
+    repeatAudioData: `Audios de ${currentSentenceIndex} frases grabadas`,
+    wordRepeatAudioData: `Audios de ${currentWordIndex} palabras grabadas`,
+    videoNarrationAudio: userData.audioData ? "Incluido" : "No grabado",
+    imageDescriptionAudio: userData.imageDescriptionAudioData ? "Incluido" : "No grabado",
+  };
+
+  zip.file("resultados_finales.json", JSON.stringify(finalData, null, 2));
+
+  if (userData.audioData) {
+    console.log("Incluyendo narración del video en el ZIP.");
+    const videoAudioArrayBuffer = await userData.audioData.arrayBuffer();
+    zip.file("narracion_video.wav", videoAudioArrayBuffer);
+  } else {
+    console.warn("Narración del video no grabada.");
+  }
+
+  if (userData.imageDescriptionAudioData) {
+    console.log("Incluyendo descripción de la lámina en el ZIP.");
+    const imageAudioArrayBuffer = await userData.imageDescriptionAudioData.arrayBuffer();
+    zip.file("descripcion_lamina.wav", imageAudioArrayBuffer);
+  } else {
+    console.warn("Descripción de la lámina no grabada.");
+  }
+
+  // Archivos de audio de frases
+  for (let i = 1; i <= currentSentenceIndex; i++) {
+    if (userData[`repeatAudio_${i}`]) {
+      const sentenceAudioArrayBuffer = await userData[`repeatAudio_${i}`].arrayBuffer();
+      zip.file(`frase_${i}.wav`, sentenceAudioArrayBuffer);
+    }
+  }
+
+  // Archivos de audio de palabras
+  for (let i = 1; i <= currentWordIndex; i++) {
+    if (userData[`wordAudio_${i}`]) {
+      const wordAudioArrayBuffer = await userData[`wordAudio_${i}`].arrayBuffer();
+      zip.file(`palabra_${i}.wav`, wordAudioArrayBuffer);
+    }
+  }
+
+  // Generar y descargar el archivo ZIP
+  zip.generateAsync({ type: "blob" }).then(blob => {
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "resultados_comprimidos.zip";
+    link.click();
+
+    alert("¡Resultados descargados con éxito!");
+  });
+}
+
+</script>
+</body>
+</html>

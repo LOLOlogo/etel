@@ -8,3 +8,7 @@ No obstante, se proporciona un ejemplo funcional que permite comprender el enfoq
 Para cualquier consulta, duda o propuesta de colaboración, puedes contactarme a través del siguiente enlace:
 🔗 https://linktr.ee/Logololo
 
+Los archivos HTML incluidos en este repositorio corresponden a los formularios utilizados para el registro y almacenamiento de datos, con excepción del informe visual, que se genera a partir de la limpieza de los datos obtenidos en el análisis.
+
+Los archivos de transcripción contienen tanto la lógica para la transcripción de audios mediante el modelo Whisper como el análisis lingüístico posterior utilizando spaCy.
+Es posible que algunos scripts no funcionen correctamente en todos los entornos; por ello, se recomienda revisar el código y adaptarlo si es necesario. En caso de error, también se incluye el código base utilizado con Whisper como referencia.
